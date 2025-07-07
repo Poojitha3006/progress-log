@@ -16,7 +16,19 @@ function renderTasks(){
     taskList.innerHTML="";
     tasks.forEach(function(taskText){
         const li=document.createElement("li");
-        li.textContent=taskText;
+        const checkbox=document.createElement("input");
+        checkbox.type="checkbox";
+        checkbox.addEventListener("change",function(){
+            if (checkbox.checked){
+                li.classList.add("completed");
+            }else{
+                li.classList.remove("completed");
+            }
+        });
+        const span=document.createElement("span");
+        span.textContent=taskText;
+        li.appendChild(checkbox);
+        li.appendChild(span);
         taskList.appendChild(li);
         });
     }
