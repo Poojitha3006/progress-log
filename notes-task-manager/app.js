@@ -14,7 +14,7 @@ addTaskBtn.addEventListener("click",function(){
 });
 function renderTasks(){
     taskList.innerHTML="";
-    tasks.forEach(function(taskText){
+    tasks.forEach(function(taskText,index){
         const li=document.createElement("li");
         const checkbox=document.createElement("input");
         checkbox.type="checkbox";
@@ -27,8 +27,17 @@ function renderTasks(){
         });
         const span=document.createElement("span");
         span.textContent=taskText;
+
+        const deleteBtn=document.createElement("button");
+        deleteBtn.textContent="🗑️";
+        deleteBtn.className="deleteBtn";
+        deleteBtn.addEventListener("click",function(){
+            tasks.splice(index,1);
+            renderTasks();
+        });
         li.appendChild(checkbox);
         li.appendChild(span);
+        li.appendChild(deleteBtn);
         taskList.appendChild(li);
         });
     }
