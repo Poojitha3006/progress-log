@@ -1,9 +1,14 @@
 const taskInput=document.getElementById("taskInput");
 const addTaskBtn=document.getElementById("addTaskBtn");
 const taskList=document.getElementById("taskList");
+const moreoptions = document.getElementById("moreoptions");
+const optionmenu = document.getElementById("optionmenu");
 
 let tasks=[];
 
+moreoptions.addEventListener("click",function(){
+    optionmenu.classList.toggle("show");
+});
 addTaskBtn.addEventListener("click",function(){
     const task=taskInput.value.trim();
     if (task!==""){
@@ -12,6 +17,7 @@ addTaskBtn.addEventListener("click",function(){
         renderTasks();
     }
 });
+
 function renderTasks(){
     taskList.innerHTML="";
     tasks.forEach(function(taskText,index){

@@ -7,6 +7,10 @@ body {
   padding: 40px;
 }
 
+.container{
+  text-align: center;
+}
+
 /* Input and Button */
 #taskInput,
 #addTaskBtn {
@@ -88,4 +92,41 @@ li input[type="text"] {
   color: black;
   border: 1px solid lightgray;
   border-radius: 6px;
+}
+
+#moreoptions{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#optionmenu{
+  display:none;
+  position:absolute;
+  top: 30px;
+  right: 0;
+  background: white;
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0 , 0, 0.1);
+  padding: 10px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#optionmenu button{
+  text-align: left;
+  padding: 6px 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#optionmenu button:hover{
+  background-color: #f0f0f0;
+}
+
+#optionmenu.show{
+  display: flex;
 }
