@@ -130,3 +130,34 @@ li input[type="text"] {
 #optionmenu.show{
   display: flex;
 }
+
+#trashContainer {
+  margin-top: 30px;
+  display: none;
+}
+
+/* Trash Buttons */
+#trashList button {
+  margin-left: 10px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#trashList button:first-child {
+  background-color: mediumseagreen;
+  color: white;
+}
+
+#trashList button:last-child {
+  background-color: crimson;
+  color: white;
+}
+
+
+#trash.active {
+  background-color: lightgray;
+  border-radius: 4px;
+}

@@ -14,6 +14,12 @@ moreoptions.addEventListener("click", function () {
     optionmenu.classList.toggle("show");
 });
 
+document.addEventListener("click", function (event) {
+    if (!moreoptions.contains(event.target) && !optionmenu.contains(event.target)) {
+        optionmenu.classList.remove("show");
+    }
+});
+
 addTaskBtn.addEventListener("click", function () {
     const task = taskInput.value.trim();
     if (task !== "") {
@@ -112,10 +118,10 @@ function renderTrash() {
 
 // Toggle trash visibility
 trashBtn.addEventListener("click", function () {
-    trashContainer.style.display =
-        trashContainer.style.display === "none" ? "block" : "none";
+    const isVisible = trashContainer.style.display === "block";
+    trashContainer.style.display = isVisible ? "none" : "block";
+    trashBtn.classList.toggle("active", !isVisible);
     renderTrash();
 });
-
 // Initial render
 renderTasks();
