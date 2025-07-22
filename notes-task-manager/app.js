@@ -22,16 +22,20 @@ document.addEventListener("click", function (event) {
 
 addTaskBtn.addEventListener("click", function () {
     const task = taskInput.value.trim();
+    const categories = document.getElementById("categories");
+    const category = categories.value;
+
     if (task !== "") {
-        tasks.push(task);
+        tasks.push({text : task, category : category });
         taskInput.value = "";
+        categories.value="General";
         renderTasks();
     }
 });
 
 function renderTasks() {
     taskList.innerHTML = "";
-    tasks.forEach(function (taskText, index) {
+    tasks.forEach(function (taskObj, index) {
         const li = document.createElement("li");
 
         const checkbox = document.createElement("input");
@@ -40,8 +44,13 @@ function renderTasks() {
             li.classList.toggle("completed", checkbox.checked);
         });
 
-        const span = document.createElement("span");
-        span.textContent = taskText;
+        const textSpan = document.createElement("span");
+        textSpan.textContent = taskObj.text;
+
+        const categorySpan = document.createElement("span");
+        categorySpan.className = "category-label";
+        categorySpan.textContent = ` [${taskObj.category}]`;
+        categorySpan.style.marginLeft = "8px"; // makes category readable
 
         const editBtn = document.createElement("button");
         editBtn.textContent = "edit";
@@ -49,7 +58,7 @@ function renderTasks() {
         editBtn.addEventListener("click", function () {
             const input = document.createElement("input");
             input.type = "text";
-            input.value = taskText;
+            input.value = taskObj.text;
 
             const saveBtn = document.createElement("button");
             saveBtn.textContent = "save";
@@ -57,7 +66,7 @@ function renderTasks() {
             saveBtn.addEventListener("click", function () {
                 const updatedText = input.value.trim();
                 if (updatedText !== "") {
-                    tasks[index] = updatedText;
+                    taskObj.text = updatedText;
                     renderTasks();
                 }
             });
@@ -78,7 +87,8 @@ function renderTasks() {
         });
 
         li.appendChild(checkbox);
-        li.appendChild(span);
+        li.appendChild(textSpan);
+        li.appendChild(categorySpan);
         li.appendChild(editBtn);
         li.appendChild(deleteBtn);
 
@@ -86,12 +96,13 @@ function renderTasks() {
     });
 }
 
+
 function renderTrash() {
     trashList.innerHTML = "";
     trashedTasks.forEach(function (taskText, index) {
         const li = document.createElement("li");
         const span = document.createElement("span");
-        span.textContent = taskText;
+        span.textContent = `${taskText.text} (${taskText.category})`;
 
         const restoreBtn = document.createElement("button");
         restoreBtn.textContent = "Restore";
